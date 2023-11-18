@@ -24,12 +24,4 @@ List<PersonalDetails> details = [
       profileimg:
           "https://media.sproutsocial.com/uploads/2022/06/profile-picture.jpeg",
       contactno: 9843517915),
-  PersonalDetails(
-      name: "Ashish Mishra",
-      jobpost: "DevOps",
-      location: "kumaripati,lalitpur",
-      email: "ashish@gmail.com",
-      profileimg:
-          "https://images.unsplash.com/photo-1529665253569-6d01c0eaf7b6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDEzfHx8ZW58MHx8fHx8&w=1000&q=80",
-      contactno: 9843517915)
 ];

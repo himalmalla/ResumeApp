@@ -14,7 +14,7 @@ Widget ProfileDetails(PersonalDetails detail) {
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: SizedBox(
-              height: 150,
+              height: double.infinity,
               width: 190,
               child: Column(
                 children: [

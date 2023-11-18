@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ResumeDetails extends StatelessWidget {
   const ResumeDetails({super.key});
@@ -10,19 +12,19 @@ class ResumeDetails extends StatelessWidget {
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Colors.transparent,
-        title: Text('Resume Details'),
+        title: const Text('Resume Details'),
       ),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            _buildheader(),
+            const _buildheader(),
             Container(
-              margin: EdgeInsets.all(16.0),
+              margin: const EdgeInsets.all(16.0),
               padding: const EdgeInsets.all(16.0),
               decoration: BoxDecoration(color: Colors.grey.shade200),
-              child: Text(
-                  " Over two year experience in the field of programming adsad adsad  asdsadsad adsd"),
+              child: const Text(
+                  "A motivated, enthusiastic and forward-thinking IT graduate from The British College seeking a role of flutter developer in an IT firm, I have capability to work in team as well as individually with resolute commitment toward the firm and eager to make positive impact",),
             ),
             _buildTitle("Skills"),
             const SizedBox(
@@ -57,11 +59,83 @@ class ResumeDetails extends StatelessWidget {
               height: 20,
             ),
             _buildTitle("Education"),
-            _buildTitle("Socials")
+            _buildExperienceRow(
+                company: "British College, Thapathali",
+                position: "Bsc(hons)Computing",
+                duration: "3.7 GPA"),
+            _buildTitle("Contact"),
+            const SizedBox(height: 8,),
+            const ListTile(
+              leading: Padding(
+                padding: EdgeInsets.only(top: 8.0, left: 20.0),
+                child: Icon(Icons.mail),
+              ),
+              title: Text("himalmalla29@gmail.com"),
+            ),
+            const ListTile(
+              leading: Padding(
+                padding: EdgeInsets.only(top: 8.0, left: 20.0),
+                child: Icon(Icons.phone),
+              ),
+              title: Text("+977-9843517915"),
+            ),
+            _buildSocialsRow()
           ],
         ),
       ),
     );
+  }
+
+  Row _buildSocialsRow() {
+    return Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const SizedBox(
+                width: 20.0,
+              ),
+              IconButton(
+                onPressed: () {
+                  _launchURL("https://www.facebook.com/himal.princemalla");
+                },
+                icon: const FaIcon(
+                  FontAwesomeIcons.facebookF,
+                  size: 30,
+                  color: Colors.indigo,
+                ),
+              ),
+              const SizedBox(width: 10,),
+              IconButton(
+                onPressed: () {
+                  _launchURL("https://github.com/himalmalla");
+                },
+                icon: const FaIcon(
+                  FontAwesomeIcons.github,
+                  size: 30,
+                  color: Colors.black,
+                ),
+              ),
+              const SizedBox(width: 10,),
+              IconButton(
+                onPressed: () {
+                  _launchURL("https://www.linkedin.com/in/himal-malla-7b861b205/");
+                },
+                icon: const FaIcon(
+                  FontAwesomeIcons.linkedin,
+                  size: 30,
+                  color: Colors.blue,
+                ),
+              ),
+            ],
+          );
+  }
+
+
+  _launchURL(String url) async{
+    if(await canLaunch(url)){
+      await launch(url);
+    } else {
+      throw 'could not launch $url';
+    }
   }
 
   ListTile _buildExperienceRow(
@@ -69,8 +143,18 @@ class ResumeDetails extends StatelessWidget {
       required String position,
       required String duration}) {
     return ListTile(
-      leading: Icon(Icons.work),
-      title: Text(company),
+      leading: const Padding(
+        padding: EdgeInsets.only(top: 10, left: 20),
+        child: Icon(
+          Icons.circle,
+          size: 12,
+        ),
+      ),
+      title: Text(
+        company,
+        style:
+            const TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
+      ),
       subtitle: Text("$position ($duration)"),
     );
   }
@@ -103,10 +187,10 @@ class ResumeDetails extends StatelessWidget {
 
   Padding _buildTitle(String title) {
     return Padding(
-      padding: EdgeInsets.only(left: 16),
+      padding: const EdgeInsets.only(left: 16),
       child: Text(
         title.toUpperCase(),
-        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+        style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
       ),
     );
   }
@@ -119,32 +203,44 @@ class _buildheader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
+    return const Row(
       children: <Widget>[
-        SizedBox(
-          width: 150,
-          height: 150,
-          child: Image.network(
-              'https://media.sproutsocial.com/uploads/2022/06/profile-picture.jpeg'),
+        Padding(
+          padding: EdgeInsets.only(left: 20),
+          child: SizedBox(
+            width: 130,
+            height: 130,
+            child: CircleAvatar(
+              backgroundColor: Colors.blue,
+              radius: 50,
+              backgroundImage: AssetImage(
+                'images/himalprofile.jpeg'),
+          ),
+          ),
         ),
-        const Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Text(
-              "Himal Malla",
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
-            ),
-            Text("Flutter Developer"),
-            Row(
-              children: <Widget>[
-                Icon(
-                  Icons.location_on,
-                  color: Colors.grey,
-                ),
-                Text("Hattiban,Lalitpur"),
-              ],
-            )
-          ],
+        Padding(
+          padding: EdgeInsets.only(left: 30),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Text(
+                "Himal Malla",
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+              ),
+              Text("Flutter Developer", style: TextStyle(color: Colors.black),),
+              SizedBox(height: 5,),
+              Row(
+                children: <Widget>[
+                  FaIcon(
+                    FontAwesomeIcons.locationDot,
+                    color: Colors.black,
+                  ),
+                  SizedBox(width: 5,),
+                  Text("Hattiban,Lalitpur"),
+                ],
+              ),
+            ],
+          ),
         )
       ],
     );
